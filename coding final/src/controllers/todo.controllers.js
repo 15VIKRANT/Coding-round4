@@ -28,7 +28,7 @@ router.get("", async (req, res) => {
     }
 })
 
-router.get("",authenticate, async(req,res)=>{
+router.get("/:id",authenticate, async(req,res)=>{
     try {
         const todo=await todo.find()
         
@@ -38,7 +38,7 @@ router.get("",authenticate, async(req,res)=>{
     }
 })
 
-router.delete("",authenticate, async(req,res)=>{
+router.delete("/:id",authenticate, async(req,res)=>{
     try {
         const todo=await todo.findByIdAndDelete(req.params.id).lean().exec();
         return res.status(200).send(todo);
@@ -49,7 +49,7 @@ router.delete("",authenticate, async(req,res)=>{
 })
 
 
-router.patch("",authenticate, async(req,res)=>{
+router.patch("/:id",authenticate, async(req,res)=>{
     try{
         const todo = await todo.findByIdAndUpdate(req.params.id, req.body, {new:true})
         return res.status(200).send(product)
