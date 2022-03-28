@@ -17,6 +17,6 @@ app.post("/login", login)
 
 app.use("/todo", todoController)
 
-app.use("/todos/:id",todoController)
+
 
 
