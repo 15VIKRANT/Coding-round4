@@ -30,8 +30,8 @@ router.get("", async (req, res) => {
 
 router.get("/:id",authenticate, async(req,res)=>{
     try {
-        const todo=await todo.find()
-        
+        const todo=await todo.findById().lean().exec()
+        return res.send(todo)
     } catch (error) {
         return res.status(401).send({message:err.messege})
         
@@ -52,7 +52,7 @@ router.delete("/:id",authenticate, async(req,res)=>{
 router.patch("/:id",authenticate, async(req,res)=>{
     try{
         const todo = await todo.findByIdAndUpdate(req.params.id, req.body, {new:true})
-        return res.status(200).send(product)
+        return res.status(200).send(todo)
     }
     catch(err){
         return res.status(400).send({message : err.message})
